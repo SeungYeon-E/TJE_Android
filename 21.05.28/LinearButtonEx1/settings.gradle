@@ -1,0 +1,2 @@
+rootProject.name = "LinearButtonEx1"
+include ':app'
