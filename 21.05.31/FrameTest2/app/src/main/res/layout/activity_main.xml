@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    >
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:insetRight="10dp"
+        android:text="LINEAR1"
+        />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:insetLeft="10dp"
+        android:text="LINEAR2"
+        />
+
+</LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        >
+        <LinearLayout
+            android:id="@+id/linear1"
+            android:visibility="visible"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LINEAR1BUTTON1"
+                android:backgroundTint="#8A8A8A"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LINEAR1BUTTON2"
+                android:backgroundTint="#8A8A8A"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:visibility="invisible"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LINEAR2BUTTON1"
+                android:backgroundTint="#ff0000"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LINEAR2BUTTON2"
+                android:backgroundTint="#ff0000"
+                />
+        </LinearLayout>
+    </FrameLayout>
+
+
+</LinearLayout>
