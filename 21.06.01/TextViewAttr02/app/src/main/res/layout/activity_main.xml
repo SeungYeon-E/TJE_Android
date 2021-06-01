@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Shadow Text"
+        android:textSize="40dp"
+        android:textColor="#ffffff"
+        android:shadowColor="#0000ff"
+        android:shadowDx="3.0"
+        android:shadowDy="3.0"
+        android:shadowRadius="3.0"
+
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wide Text"
+        android:textSize="30dp"
+        android:textScaleX="2.0"
+
+        />
+    <TextView
+        android:background="#ff0000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="동해물과 백두산이 마르고 닳도록 하나님이 보우하사 우리나라 만세. 대한 사람 대한으로 길이 보전하세"
+
+
+        />
+    <TextView
+        android:background="#00ff00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="동해물과 백두산이 마르고 닳도록 하나님이 보우하사 우리나라 만세. 대한 사람 대한으로 길이 보전하세"
+        android:lineSpacingMultiplier="1.5"
+
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Characters"
+        android:textColorHint="#ffff00"
+        android:inputType="textCapCharacters"
+
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Characters"
+        android:inputType="textCapWords"
+
+        />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Characters"
+        android:inputType="textCapSentences"
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="동해물과 백두산이 마르고 닳도록 하나님이 보우하사 우리나라 만세. 대한 사람 대한으로 길이 보전하세"
+        android:singleLine="true"
+        android:ellipsize="start"
+        />
+
+</LinearLayout>
