@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SMALL FONT"
+        android:padding="10dp"
+        />
+    <Button
+        android:id="@+id/large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LARGE FONT"
+        android:padding="10dp"
+        />
+
+    <TextView
+        android:id="@+id/text01"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        android:padding="10dp"
+        android:textSize="20dp"
+        />
+
+</LinearLayout>
