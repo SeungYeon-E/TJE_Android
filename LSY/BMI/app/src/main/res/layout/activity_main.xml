@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <ImageView
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="-60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bmi"
+            />
+        <TextView
+            android:id="@+id/text_01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="BMI(신체 질량지수)란?"
+            android:textSize="18dp"
+            android:layout_marginLeft="30dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:textSize="15dp"
+            android:text="
+체질량지수(Body Mass Index)로 체중을 키의 제곱으로 나눈 값을 통해 지방의 양을 추정하는 비만측정법.\n
+이 BMI 지수가 높으면 높을수록 생활습관병이 걸리기 쉽고, 비만학회에서는 남녀 모두 지수가 22일때
+가장 건강한 상태이고 이상적인 체중일 때 라고 합니다."
+            />
+
+    </LinearLayout>
+
+    <SlidingDrawer
+        android:id="@+id/slidingDrawer1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:content="@+id/content"
+        android:handle="@id/handle"
+        >
+        <Button
+            android:id="@+id/handle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:background="#AD66CEDB"
+            android:backgroundTint="#AD66CEDB"
+            android:text="당신의 BMI가 궁금하다면 끌어올려주세요"
+            />
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#DFFFFFFF"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="304dp"
+                android:src="@drawable/bmi2" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="신장"
+                    />
+                <EditText
+                    android:id="@+id/et1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:gravity="center"
+                    android:maxLength="3"
+                    android:hint="               "
+                    android:inputType="number"
+                    android:digits="0123456789"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="cm"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="체중"
+                    />
+                <EditText
+                    android:id="@+id/et2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="               "
+                    android:maxLength="3"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:inputType="number"
+                    android:digits="0123456789"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="kg"
+                    />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnresult"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="계산하기"
+                android:backgroundTint="#AD66CEDB"
+                />
+
+        </LinearLayout>
+
+    </SlidingDrawer>
+
+    <FrameLayout
+        android:visibility="invisible"
+        android:id="@+id/flaout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5FAFD"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-입력하신 신장과 체중-"
+                android:textSize="17dp"
+                android:layout_marginBottom="10dp"
+                />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:text="신장"
+                />
+            <EditText
+                android:id="@+id/et3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textSize="17dp"
+                android:hint="     160     "
+                android:enabled="false"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:text="cm"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:text="체중"
+                />
+            <EditText
+                android:id="@+id/et4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="      49      "
+                android:textSize="17dp"
+                android:singleLine="true"
+                android:enabled="false"
+                android:gravity="center"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="17dp"
+                android:text="kg"
+                />
+
+        </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="25dp"
+                    android:text="당신의 BMI는"
+                    />
+                <EditText
+                    android:id="@+id/et5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="    19.14    "
+                    android:textStyle="bold"
+                    android:textSize="30dp"
+                    android:singleLine="true"
+                    android:enabled="false"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="181dp"
+                android:src="@drawable/bmi4"
+                />
+            <TextView
+                android:id="@+id/tv02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:padding="30dp"
+                android:text="정상 체중입니다!"
+                />
+            <Button
+                android:id="@+id/btnmain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="돌아가기"
+                android:backgroundTint="#AD66CEDB"
+                />
+
+        </LinearLayout>
+
+    </FrameLayout>
+    <FrameLayout
+        android:visibility="invisible"
+        android:id="@+id/prolayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5FAFD"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:padding="50dp"
+                android:text="당신의"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-150dp"
+                android:layout_marginBottom="-150dp"
+                android:padding="50dp"
+                android:src="@drawable/bmi3" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:padding="50dp"
+                android:gravity="right"
+                android:text="측정중..."
+                />
+            <ProgressBar
+                android:id="@+id/pb_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="200"
+                android:progress="50"
+                android:secondaryProgress="100"
+                />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</RelativeLayout>
