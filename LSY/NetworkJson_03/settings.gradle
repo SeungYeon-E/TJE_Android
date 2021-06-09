@@ -1,0 +1,2 @@
+rootProject.name = "NetworkJson_03"
+include ':app'
