@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.SelectActivity"
+    android:gravity="center"
+    android:background="#4888FF00"
+    >
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        android:background="#00000000"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/select_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <WebView
+        android:id="@+id/selectWebView"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="0"
+        android:visibility="invisible"
+        />
+    <ImageView
+        android:id="@+id/insert_image"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="2"
+        android:src="@drawable/user"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:padding="30dp"
+            />
+        <EditText
+            android:id="@+id/select_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="                        하하하                      "
+            android:enabled="false"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Phone"
+            android:padding="30dp"
+            />
+        <EditText
+            android:id="@+id/select_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="                01088889999                "
+
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:padding="30dp"
+            />
+        <EditText
+            android:id="@+id/select_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="                    서울특별시                    "
+            android:enabled="false"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:padding="30dp"
+            />
+        <EditText
+            android:id="@+id/select_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="            hahaha@naver.com          "
+            android:enabled="false"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="0.5"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:stateListAnimator="@null"
+        android:text="logout"
+        android:textStyle="bold"
+        android:textColor="#676767"
+        />
+    </LinearLayout>
+</LinearLayout>
