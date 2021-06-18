@@ -31,6 +31,7 @@ public class NetworkTask extends AsyncTask<Integer, String, Object> {
         this.context = context;
         this.mAddr = mAddr;
         this.members = members;
+        this.members = members;
         this.members = new ArrayList<Friends>();
         this.where = where;
     }

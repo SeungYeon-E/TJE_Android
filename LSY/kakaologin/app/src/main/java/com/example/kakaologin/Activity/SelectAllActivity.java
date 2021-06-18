@@ -2,13 +2,9 @@ package com.example.kakaologin.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -22,22 +18,23 @@ import com.example.kakaologin.Bean.Friends;
 import com.example.kakaologin.NetworkTask.NetworkTask;
 import com.example.kakaologin.R;
 import com.example.kakaologin.Swife.MySwipeHelper;
+import com.example.kakaologin.common.CommonInfo;
 
 import java.util.ArrayList;
 
 public class SelectAllActivity extends AppCompatActivity {
 
     String urlAddr = null;
-    ArrayList<Friends> members;
+    ArrayList<Friends> members, members1;
     FriendsAdapter adapter;
+//    FavoriteFriendsAdapter adapter1;
 //    ListView listView;
-    String macIP, userid, search;
 
     androidx.appcompat.widget.Toolbar toolbar;
     ActionBar actionBar;
 
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+    RecyclerView recyclerView, frecyclerView;
+    RecyclerView.LayoutManager layoutManager, frelayoutManager;
     //    RecyclerView.Adapter adapter;
 
     ItemTouchHelper helper;
@@ -48,12 +45,7 @@ public class SelectAllActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_all);
 
         recyclerView = findViewById(R.id.recycler_students);
-
-//        listView = findViewById(R.id.lv_student);
-
-        Intent intent = getIntent();
-        macIP = intent.getStringExtra("macIP");
-        urlAddr = "http://" + macIP + ":8080/phonebook/phonebook_query_all.jsp";
+//        frecyclerView = findViewById(R.id.recycler_favorite);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -87,10 +79,12 @@ public class SelectAllActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         connectGetData();
+//        connectGetFavoriteData();
     }
 
     public void connectGetData(){
         try{
+            urlAddr = "http://" + CommonInfo.hostIP + ":8080/phonebook/phonebook_query_all.jsp";
             NetworkTask networkTask = new NetworkTask(SelectAllActivity.this, urlAddr, "select");
             Object obj = networkTask.execute().get();
             members = (ArrayList<Friends>) obj;
@@ -112,13 +106,32 @@ public class SelectAllActivity extends AppCompatActivity {
             //RecyclerView에 ItemTouchHelper 붙이기
             helper.attachToRecyclerView(recyclerView);
 
-            Intent  intent = getIntent();
-            userid = intent.getStringExtra("userid");
-
         }catch (Exception e){
             e.printStackTrace();
         }
     }
+//    public void connectGetFavoriteData(){
+//        try{
+//            urlAddr = "http://" + CommonInfo.hostIP + ":8080/phonebook/phonebook_favorite_query_all.jsp";
+//            NetworkTask networkTask = new NetworkTask(SelectAllActivity.this, urlAddr, "selectFavorite");
+//            Object obj = networkTask.execute().get();
+//            members1 = (ArrayList<Friends>) obj;
+//
+//            frelayoutManager = new LinearLayoutManager(SelectAllActivity.this);
+//            frecyclerView.setLayoutManager(frelayoutManager);
+//
+//            adapter1 = new FavoriteFriendsAdapter(SelectAllActivity.this, R.layout.card_layout, members1);
+//            frecyclerView.setAdapter(adapter1);
+//
+//            //ItemTouchHelper 생성
+//            helper = new ItemTouchHelper(new MySwipeHelper(adapter1));
+//            //RecyclerView에 ItemTouchHelper 붙이기
+//            helper.attachToRecyclerView(frecyclerView);
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
 //    AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
 //        Intent intent = null;
 //        @Override
@@ -160,15 +173,11 @@ public class SelectAllActivity extends AppCompatActivity {
             case R.id.action_menu_02:
                 //select account item
                 intent = new Intent(SelectAllActivity.this, InsertActivity.class);
-                intent.putExtra("macIP", macIP);
-                intent.putExtra("userid",userid);
                 startActivity(intent);
                 break;
             case android.R.id.home:
                 //select back button
                 intent = new Intent(SelectAllActivity.this, SelectActivity.class);
-                intent.putExtra("macIP", macIP);
-                intent.putExtra("userid",userid);
                 startActivity(intent);
                 break;
         }

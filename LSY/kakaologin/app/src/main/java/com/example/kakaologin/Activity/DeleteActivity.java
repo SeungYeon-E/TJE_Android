@@ -11,11 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kakaologin.NetworkTask.NetworkTask;
 import com.example.kakaologin.R;
+import com.example.kakaologin.common.CommonInfo;
 
 public class DeleteActivity extends AppCompatActivity {
 
     String urlAddr = null;
-    String id, sname, sdept, sphone, macIP;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,9 +25,8 @@ public class DeleteActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
-        macIP = intent.getStringExtra("macIP");
-        urlAddr = "http://" + macIP + ":8080/phonebook/phonebookDeleteReturn.jsp?";
 
+        urlAddr = "http://" + CommonInfo.hostIP + ":8080/phonebook/phonebookDeleteReturn.jsp?";
         urlAddr = urlAddr + "id=" + id;
 
         String result = connectInsertData();

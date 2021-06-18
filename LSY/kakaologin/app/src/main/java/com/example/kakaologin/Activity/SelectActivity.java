@@ -45,7 +45,7 @@ public class SelectActivity extends AppCompatActivity {
 
     String urlAddr = null;
     private ArrayList<Friends> data = null;
-    String sName, sPhone, sAddress, sEmail, sImage, macIP, userId;
+    String sName, sPhone, sAddress, sEmail, sImage;
 
     EditText eName, ePhone, eAddress, eEmail;
 
@@ -55,7 +55,7 @@ public class SelectActivity extends AppCompatActivity {
     ActionBar actionBar;
     CommonInfo commonInfo = new CommonInfo();
     Button logout;
-    private MainActivity.SessionCallback sessionCallback;
+    private SessionCallback sessionCallback = new SessionCallback();
     Session session;
 
     Intent intent;
@@ -73,13 +73,9 @@ public class SelectActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);//기본 제목을 없애줍니다.
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        intent = getIntent();
-        userId = intent.getStringExtra("userid");
-        macIP = commonInfo.hostIP;
+        urlAddr = "http://" + CommonInfo.hostIP + ":8080/phonebook/phonebookSelectReturn.jsp?";
 
-        urlAddr = "http://" + macIP + ":8080/phonebook/phonebookSelectReturn.jsp?";
-
-        String result = connectInsertData(userId);
+        String result = connectInsertData(MainActivity.userid);
 
         eName = findViewById(R.id.select_name);
         ePhone = findViewById(R.id.select_phone);
@@ -166,7 +162,7 @@ public class SelectActivity extends AppCompatActivity {
                         "<html><head>"+
                         "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />"+
                         "<head><body style='margin:0; padding:0; text-align:center;'>"+
-                        "<img src=\"http://172.30.1.8:8080/phonebook/img/";
+                        "<img src=\"http://"+CommonInfo.hostIP+":8080/phonebook/img/";
         content += image + "\" alt=\"이미지\" height=\"100%\"></body></html>";
         webView.loadData(content, "text/html; charset=utf-8", "UTF-8");
     }
@@ -187,7 +183,6 @@ public class SelectActivity extends AppCompatActivity {
                 intent.putExtra("address", sAddress);
                 intent.putExtra("email", sEmail);
                 intent.putExtra("image", sImage);
-                intent.putExtra("macIP", macIP);
                 startActivity(intent);
 
 //                sName = eName.getText().toString();

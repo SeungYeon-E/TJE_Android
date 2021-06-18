@@ -1,6 +1,5 @@
 package com.example.kakaologin.Activity;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -10,23 +9,19 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.kakaologin.NetworkTask.NetworkTask;
 import com.example.kakaologin.R;
-import com.example.kakaologin.login.SessionCallback;
+import com.example.kakaologin.common.CommonInfo;
 import com.kakao.auth.AuthType;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.LoginButton;
 import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.LogoutResponseCallback;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.usermgmt.response.model.Profile;
@@ -45,17 +40,15 @@ public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
     LoginButton loginV1;
 
-    String tempIp;
     String urlAddr = null;
-    String uid;
+    public static String userid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tempIp = "172.30.1.8";
-        urlAddr = "http://" + tempIp + ":8080/phonebook/userInsertReturn.jsp?";
+        urlAddr = "http://" + CommonInfo.hostIP + ":8080/phonebook/userInsertReturn.jsp?";
 
         loginV1 = findViewById(R.id.loginV1);
         logout = findViewById(R.id.logout);
@@ -79,7 +72,6 @@ public class MainActivity extends Activity {
                 session.open(AuthType.KAKAO_LOGIN_ALL, MainActivity.this);
             }
         });
-
 
         // 카카오 개발자 홈페이지에 등록할 해시키 구하기
 //        getHashKey();
@@ -132,12 +124,7 @@ public class MainActivity extends Activity {
             }
         }
     }
-    //로그인 성공시 리스트 보여주기
-    public void goList(){
-        Intent intent = new Intent(MainActivity.this, SelectAllActivity.class);
-        intent.putExtra("macIP", tempIp);
-        startActivity(intent);
-    }
+
     //카카오로그인 구현
     public class SessionCallback implements ISessionCallback {
 
@@ -152,6 +139,9 @@ public class MainActivity extends Activity {
         public void onSessionOpenFailed(KakaoException exception) {
             Log.e("SessionCallback :: ", "onSessionOpenFailed : " + exception.getMessage());
         }
+
+
+
 
         // 사용자 정보 요청
         public void requestMe() {
@@ -170,7 +160,7 @@ public class MainActivity extends Activity {
                         @Override
                         public void onSuccess(MeV2Response result) {
                             Log.i("KAKAO_API", "사용자 아이디: " + result.getId());
-                            uid = String.valueOf(result.getId());
+                            userid = String.valueOf(result.getId());
                             UserAccount kakaoAccount = result.getKakaoAccount();
                             if (kakaoAccount != null) {
 
@@ -216,7 +206,7 @@ public class MainActivity extends Activity {
                                 Log.i("KAKAO_API", "onSuccess: kakaoAccount null");
 
                             }
-                            urlAddr = urlAddr + "id=" + uid;
+                            urlAddr = urlAddr + "id=" + userid;
                             Log.v("message", "urlAddr="+urlAddr);
                             String result1 = connectInsertData();
                             //첫가입로그인때만 실행된다!! 대존잼
@@ -226,8 +216,6 @@ public class MainActivity extends Activity {
                             }
                             String id = String.valueOf(result.getId());
                             Intent intent = new Intent(MainActivity.this, SelectAllActivity.class);
-                            intent.putExtra("macIP",tempIp);
-                            intent.putExtra("userid",uid);
                             startActivity(intent);
                             finish();
 

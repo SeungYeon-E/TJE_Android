@@ -22,16 +22,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.kakaologin.Bean.Friends;
 import com.example.kakaologin.NetworkTask.NetworkTask;
 import com.example.kakaologin.R;
+import com.example.kakaologin.common.CommonInfo;
 
 import java.util.ArrayList;
 
 public class UpdateActivity extends AppCompatActivity {
 
     String urlAddr = null;
-    String sId, sName, sPhone, sAddress, sEmail, sImage, macIP, userId;
+    String sId, sName, sPhone, sAddress, sEmail, sImage;
 
     EditText eName, ePhone, eAddress, eEmail;
-    Button btnInsert;
 
     androidx.appcompat.widget.Toolbar toolbar;
     ActionBar actionBar;
@@ -55,10 +55,7 @@ public class UpdateActivity extends AppCompatActivity {
         sAddress = intent.getStringExtra("address");
         sEmail = intent.getStringExtra("email");
         sImage = intent.getStringExtra("image");
-        macIP = intent.getStringExtra("macIP");
-        intent.putExtra("macIP",macIP);
-        urlAddr = "http://" + macIP + ":8080/phonebook/phonebookUpdateReturn.jsp?";
-        Log.v("message", "ma"+macIP);
+        urlAddr = "http://" + CommonInfo.hostIP + ":8080/phonebook/phonebookUpdateReturn.jsp?";
 
         eName = findViewById(R.id.update_name);
         ePhone = findViewById(R.id.update_phone);

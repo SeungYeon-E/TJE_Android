@@ -33,6 +33,7 @@ import androidx.core.app.ActivityCompat;
 import com.example.kakaologin.NetworkTask.ImageUploader;
 import com.example.kakaologin.NetworkTask.NetworkTask;
 import com.example.kakaologin.R;
+import com.example.kakaologin.common.CommonInfo;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -45,7 +46,7 @@ public class InsertActivity extends AppCompatActivity {
     final static String TAG = "MainActivity";
     String urlAddr = null;
 
-    String sName, sPhone, sAddress, sEmail, sImage, macIP, userId;
+    String sName, sPhone, sAddress, sEmail, sImage;
 
     EditText eName, ePhone, eAddress, eEmail;
     ImageView imageView;
@@ -54,6 +55,7 @@ public class InsertActivity extends AppCompatActivity {
     ActionBar actionBar;
 
     String devicePath = Environment.getDataDirectory().getAbsolutePath() + "/data/com.example.kakaologin/";
+
     private final int REQ_CODE_SELECT_IMAGE = 300; // Gallery Return Code
     private String img_path = null; // 최종 file name
     private String f_ext = null;    // 최종 file extension
@@ -74,10 +76,7 @@ public class InsertActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);//기본 제목을 없애줍니다.
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        Intent intent = getIntent();
-        macIP = intent.getStringExtra("macIP");
-        userId = intent.getStringExtra("userid");
-        urlAddr = "http://" + macIP + ":8080/phonebook/phonebookInsertReturn.jsp?";
+        urlAddr = "http://" + CommonInfo.hostIP + ":8080/phonebook/phonebookInsertReturn.jsp?";
 
         eName = findViewById(R.id.insert_name);
         ePhone = findViewById(R.id.insert_phone);
@@ -122,7 +121,7 @@ public class InsertActivity extends AppCompatActivity {
                 sAddress = eAddress.getText().toString();
                 sEmail = eEmail.getText().toString();
 
-                urlAddr = urlAddr + "name=" + sName + "&phone=" + sPhone + "&address=" + sAddress + "&email=" + sEmail + "&userid=" + userId;
+                urlAddr = urlAddr + "name=" + sName + "&phone=" + sPhone + "&address=" + sAddress + "&email=" + sEmail + "&userid=" + MainActivity.userid;
 
                 Log.v("message", "urlAddr="+urlAddr);
 
@@ -147,7 +146,7 @@ public class InsertActivity extends AppCompatActivity {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            urlAddr = "http://172.30.1.8:8080/phonebook/multipartRequest.jsp";
+            urlAddr = "http://"+CommonInfo.hostIP+":8080/phonebook/multipartRequest.jsp";
 
 
 
@@ -156,30 +155,30 @@ public class InsertActivity extends AppCompatActivity {
             intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, REQ_CODE_SELECT_IMAGE);
 
-//            ImageUploader imageUploader = new ImageUploader(InsertActivity.this, imageView, img_path, urlAddr);
-//            try {
-//                Integer result = imageUploader.execute(100).get();
-//                switch (result) {
-//                    case 1:
-//                        Toast.makeText(InsertActivity.this, "Success!", Toast.LENGTH_SHORT).show();
-//
-//                        File file = new File(img_path);
-//                        file.delete();
-//                        break;
-//                    case 0:
-//                        Toast.makeText(InsertActivity.this, "Error", Toast.LENGTH_SHORT).show();
-//                        break;
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+            ImageUploader imageUploader = new ImageUploader(InsertActivity.this, imageView, img_path, urlAddr);
+            try {
+                Integer result = imageUploader.execute(100).get();
+                switch (result) {
+                    case 1:
+                        Toast.makeText(InsertActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+
+                        File file = new File(img_path);
+                        file.delete();
+                        break;
+                    case 0:
+                        Toast.makeText(InsertActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         Log.v(TAG, "Data :" + String.valueOf(data));
-        urlAddr = "http://172.30.1.8:8080/phonebook/multipartRequest.jsp";
+        urlAddr = "http://"+CommonInfo.hostIP+":8080/phonebook/multipartRequest.jsp";
         if (requestCode == REQ_CODE_SELECT_IMAGE && resultCode == Activity.RESULT_OK) {
             try {
                 //이미지의 URI를 얻어 경로값으로 반환.

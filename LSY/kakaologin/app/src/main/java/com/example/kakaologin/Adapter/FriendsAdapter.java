@@ -24,6 +24,7 @@ import com.example.kakaologin.Interface.MyButtonClickListener;
 import com.example.kakaologin.NetworkTask.NetworkTask;
 import com.example.kakaologin.R;
 import com.example.kakaologin.Swife.MySwipeHelper;
+import com.example.kakaologin.common.CommonInfo;
 
 import java.util.ArrayList;
 
@@ -34,15 +35,14 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
     private int layout = 0;
     private ArrayList<Friends> data = null;
     Intent intent = null;
-    String macIP = "172.30.1.8";
-    String urlAddr = "http://" + macIP + ":8080/phonebook/phonebookDeleteReturn.jsp?";
+    String urlAddr;
+    String result;
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView tv_name;
         public TextView tv_phone;
         public WebView webView;
-
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -66,7 +66,6 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
                         intent.putExtra("address", data.get(position).getAddress());
                         intent.putExtra("email", data.get(position).getEmail());
                         intent.putExtra("image", data.get(position).getImage());
-                        intent.putExtra("macIP", macIP);
                         v.getContext().startActivity(intent);
                     }
                 }
@@ -99,6 +98,18 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
         Log.v("message", data.get(position).getPhone());
     }
 
+    private String htmlData(String image){
+        String content =
+                "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"+
+                        "<html><head>"+
+                        "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />"+
+                        "<head><body>"+
+                        "<img src=\"http://"+CommonInfo.hostIP+":8080/phonebook/img/";
+        content += image + "\" alt=\"이미지\" width=\"100%\" height=\"100%\"></body></html>";
+
+        return content;
+    }
+
     @Override
     public int getItemCount() {
         return data.size();
@@ -110,17 +121,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
         this.data = data;
     }
 
-    private String htmlData(String image){
-        String content =
-                "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>"+
-                        "<html><head>"+
-                        "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />"+
-                        "<head><body>"+
-                        "<img src=\"http://172.30.1.8:8080/phonebook/img/";
-        content += image + "\" alt=\"이미지\" width=\"100%\" height=\"100%\"></body></html>";
 
-        return content;
-    }
 
     public boolean onItemMove(int from_position, int to_position) {
         //이동할 객체 저장
@@ -134,10 +135,10 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
         return true;
     }
     @Override
-    public void onItemSwipe(int position) {
+    public void onLeftSwipe(int position) {
         data.remove(position);
-
-        String result = connectInsertData(data.get(position).getId());
+        urlAddr = "http://" + CommonInfo.hostIP + ":8080/phonebook/phonebookDeleteReturn.jsp?";
+        result = connectInsertData(data.get(position).getId());
 
         if(result.equals("1")){
             notifyItemRemoved(position);
@@ -145,17 +146,58 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.ViewHold
         }else{
             Toast.makeText(mContext, "삭제이 실패 하였습니다.", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     @Override
-    public void onLeftClick(int position, RecyclerView.ViewHolder viewHolder) {
+    public void onRightSwipe(int position) {
+//        data.remove(position);
+        Log.v("message", "position"+position);
+        urlAddr = "http://" + CommonInfo.hostIP + ":8080/phonebook/phonebookFavoriteReturn.jsp?";
+        result = connectFavoriteData(data.get(position).getId());
 
+        if(result.equals("1")){
+            notifyDataSetChanged();
+            Toast.makeText(mContext, "연락처가 즐겨찾기되었습니다.", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(mContext, "즐겨찾기 실패 하였습니다.", Toast.LENGTH_SHORT).show();
+        }
     }
-
-    @Override
-    public void onRightClick(int position, RecyclerView.ViewHolder viewHolder) {
-
+//    @Override
+//    public void onItemSwipe(int position) {
+//        data.remove(position);
+//
+//        String result = connectInsertData(data.get(position).getId());
+//
+//        if(result.equals("1")){
+//            notifyItemRemoved(position);
+//            Toast.makeText(mContext, "연락처가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+//        }else{
+//            Toast.makeText(mContext, "삭제이 실패 하였습니다.", Toast.LENGTH_SHORT).show();
+//        }
+//
+//    }
+//
+//    @Override
+//    public void onLeftClick(int position, RecyclerView.ViewHolder viewHolder) {
+//
+//    }
+//
+//    @Override
+//    public void onRightClick(int position, RecyclerView.ViewHolder viewHolder) {
+//
+//    }
+    private String connectFavoriteData(String id){
+        String result = null;
+        String tempAddr = urlAddr + "id=" + id;
+        try {
+            NetworkTask networkTask = new NetworkTask(mContext, tempAddr, "favorite");
+            Object obj = networkTask.execute().get();
+            result = (String) obj;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
+        //잘끝났으면 1 아니면 에러
     }
     private String connectInsertData(String id){
         String result = null;

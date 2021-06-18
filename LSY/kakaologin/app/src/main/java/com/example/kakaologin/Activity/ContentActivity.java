@@ -31,6 +31,7 @@ import com.example.kakaologin.Bean.Friends;
 import com.example.kakaologin.NetworkTask.NetworkTask;
 import com.example.kakaologin.R;
 import com.example.kakaologin.Swife.MySwipeHelper;
+import com.example.kakaologin.common.CommonInfo;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ public class ContentActivity extends AppCompatActivity {
 
     String urlAddr = null;
     ArrayList<Friends> user;
-    String sId, sName, sPhone, sAddress, sEmail, sImage, macIP, userId;
+    String sId, sName, sPhone, sAddress, sEmail, sImage, macIP;
 
     EditText eName, ePhone, eAddress, eEmail;
 
@@ -101,7 +102,6 @@ public class ContentActivity extends AppCompatActivity {
         eAddress.setText(sAddress);
         eEmail.setText(sEmail);
 
-
         ePhone.setOnTouchListener(mTouchListener);
 
     }
@@ -111,7 +111,7 @@ public class ContentActivity extends AppCompatActivity {
                         "<html><head>"+
                         "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />"+
                         "<head><body style='margin:0; padding:0; text-align:center;'>"+
-                        "<img src=\"http://172.30.1.8:8080/phonebook/img/";
+                        "<img src=\"http://"+ CommonInfo.hostIP +":8080/phonebook/img/";
         content += image + "\" alt=\"이미지\" height=\"100%\"></body></html>";
         webView.loadData(content, "text/html; charset=utf-8", "UTF-8");
     }
@@ -138,15 +138,6 @@ public class ContentActivity extends AppCompatActivity {
                 intent.putExtra("macIP", macIP);
                 startActivity(intent);
 
-//                sName = eName.getText().toString();
-//                sPhone = ePhone.getText().toString();
-//                sAddress = eAddress.getText().toString();
-//                sEmail = eEmail.getText().toString();
-//
-//                urlAddr = urlAddr + "name=" + sName + "&phone=" + sPhone + "&address=" + sAddress + "&email=" + sEmail + "&id=" + sId;
-//
-//                Log.v("message", "urlAddr="+urlAddr);
-//
                 finish();
                 break;
             case android.R.id.home:
