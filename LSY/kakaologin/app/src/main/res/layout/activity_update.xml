@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.UpdateActivity"
+    android:padding="10dp"
+    android:background="#4888FF00"
+    >
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:elevation="0dp"
+        android:background="#00000000"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/update_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:layout_weight="1"
+            />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/insert_image"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="2"
+        android:src="@drawable/user"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:padding="30dp"
+            />
+        <EditText
+            android:id="@+id/update_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="                                                   "
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Phone"
+            android:padding="30dp"
+            />
+        <EditText
+            android:id="@+id/update_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="                                                   "
+            android:editable="false"
+            android:inputType="number"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:padding="30dp"
+            />
+        <EditText
+            android:id="@+id/update_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="                                                   "
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:padding="30dp"
+            />
+        <EditText
+            android:id="@+id/update_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="                                                   "
+            />
+
+    </LinearLayout>
+
+    <!--<Button
+        android:id="@+id/insert_btn"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="0.5"
+        android:textSize="20dp"
+        android:text="입력"
+        android:textStyle="bold"
+        android:textColor="#676767"
+        android:stateListAnimator="@null"
+        />-->
+
+</LinearLayout>
